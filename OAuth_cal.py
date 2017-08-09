@@ -1,13 +1,5 @@
-#Learning how to use OAuth2 and google calendar api
-
-#GOAL: To be able to create an event with a specific time
-#      so that I can use this for the larger importer project
-
-#These libraies are the ones used in the quickstart python example
-#Most of this code will be based/copied from that file
-#In order to learn how to use OAuth 2.0 we must first understand the quickstart code
-
-
+#OAuth 2.0 helper functions used across several google calendar projects
+#mostly copied from the the google calendar API quickstart
 from __future__ import print_function
 import httplib2
 import os
@@ -120,4 +112,13 @@ def updateEvent(event):
     service.events().update(calendarId='primary', eventId=event['id'], body=event).execute()
 
     print('Event Updated')
+
+def insertEvent(event):
+    #INPUT: Google calendar API JSON to be inserted into calendar
+    service = setupService()
+
+    #insert the event into the calendar
+    service.events().insert(calendarId='primary', body=event).execute()
+
+    print('Inserted event')
 
